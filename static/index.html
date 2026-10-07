@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance AI Agent</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>Your compliance agent</h1>
+            </div>
+            <p class="subtitle">AI-Powered Regulatory Audit Agent</p>
+        </header>
+
+        <main>
+            <div class="card upload-section glass-panel" style="margin-bottom: 2rem;">
+                <h2><i class="fa-solid fa-file-arrow-up"></i> Upload Company Policy</h2>
+                <p>Upload text or PDF documents to store as evidence in the vector database.</p>
+                <div class="file-upload-container">
+                    <input type="file" id="file-upload" accept=".txt,.md,.pdf" class="file-input" hidden>
+                    <label for="file-upload" class="file-label">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span id="file-name">Choose a file or drag & drop it here</span>
+                    </label>
+                    <button id="upload-btn" class="secondary-btn" disabled>Upload to Pinecone</button>
+                </div>
+                <div id="upload-status" class="hidden"></div>
+            </div>
+
+            <div class="card input-section glass-panel">
+                <h2><i class="fa-solid fa-scale-balanced"></i> Regulation Text</h2>
+                <p>Enter the regulatory snippet you want to audit against the company policy.</p>
+                
+                <textarea id="regulation-input" placeholder="Enter regulation text.."></textarea>
+                
+                <button id="audit-btn" class="primary-btn">
+                    <span>Run Full Audit</span>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </button>
+            </div>
+
+            <div class="loading-state hidden" id="loading-state">
+                <div class="spinner"></div>
+                <h3>Agent is thinking...</h3>
+                <p>Extracting questions, retrieving evidence, and analyzing compliance via Qwen3:4b.</p>
+                <p class="warning"><i class="fa-solid fa-triangle-exclamation"></i> This process may take several minutes on local hardware.</p>
+            </div>
+
+            <div class="results-section hidden" id="results-section">
+                <h2><i class="fa-solid fa-file-contract"></i> Audit Results</h2>
+                <div id="results-container" class="results-container">
+                    <!-- Results injected here -->
+                </div>
+            </div>
+            
+            <div class="error-state hidden glass-panel" id="error-state">
+                <i class="fa-solid fa-circle-exclamation error-icon"></i>
+                <h3 id="error-title">An Error Occurred</h3>
+                <p id="error-message">Something went wrong during the audit process.</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
